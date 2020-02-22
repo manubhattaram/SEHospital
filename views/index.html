@@ -329,7 +329,22 @@
 										</select>
 										<input name="subject" placeholder="Appointment date"  onblur="this.placeholder = 'Enter Appointment date'"
 										 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')"  id="appdate" min = '22-02-2020'>
+										 <script>
+										var today = new Date();
+										var dd = today.getDate();
+										var mm = today.getMonth()+1; //January is 0!
+										var yyyy = today.getFullYear();
+										 if(dd<10){
+														dd='0'+dd
+												}
+												if(mm<10){
+														mm='0'+mm
+												}
 
+										today = dd+'-'+mm+'-'+yyyy;
+										document.getElementById("appdate").setAttribute("min", today);
+										document.getElementById("dob").setAttribute("max", today);
+										</script>
 										<textarea class="common_textarea form-control" name="message" placeholder="message" onfocus="this.placeholder = ''"
 										 onblur="this.placeholder = 'Message'" required=""></textarea>
 									</div>
