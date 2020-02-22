@@ -32,7 +32,7 @@
 					<div class="col-lg-9 col-sm-6 col-8 header-top-right">
 						<a href="tel:+9199999999996"><span class="lnr lnr-phone-handset"></span> <span class="text"><span class="text">+91 9999999999</span></span></a>
 						<a href="mailto:support.hestia@gmail.com"><span class="lnr lnr-envelope"></span> <span class="text"><span class="text">support.hestia@gmail.com</span></span></a>
-						<a href="#" class="primary-btn text-uppercase">Login</a>
+						<a href="patientlogin.html" class="primary-btn text-uppercase">Login</a>
 					</div>
 				</div>
 			</div>
@@ -310,25 +310,25 @@
 							</div>
 					<div class="row justify-content-center">
 						<div class="appoinment_form_section lite_bg">
-							<form class="form_area" id="myForm" action="mail.html" method="post" id= "forminput" action="appoinment" method= "POST" >
+							<form class="form_area" id="myForm" action="mail.html" method="post" action="/appointment" method= "POST" >
 								<div class="row">
 									<div class="col-lg-12 form_group">
 										<input name="name" placeholder="Patient name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your name'"
-										 class="common_input form-control" required="" type="text">
+										 class="common_input form-control" required="" type="text" >
 										<input name="email" placeholder="Email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
 										 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common_input form-control"
 										 required="" type="email">
-										<input name="name" placeholder="Date of birth"  onblur="this.placeholder = 'Enter date of birth'"
-										 class="common_input form-control" required=""  type="text" onfocus="(this.type='date')"  id="dob" max ='22-02-2020'>
-										<select class="default-select">
+										<input name="dob" placeholder="Date of birth"  onblur="this.placeholder = 'Enter date of birth'"
+										 class="common_input form-control" required=""  type="text" onfocus="(this.type='date')"  id="dob" max ='2020-02-22' step="1" >
+										<select name ="field" class="default-select">
 											<option data-display="Doctor’s field">Doctor needed in</option>
 											<option value="1">ENT</option>
 											<option value="2">Physician</option>
 											<option value="3">Gynaecologist</option>
 											<option value="4">Dentist</option>
 										</select>
-										<input name="subject" placeholder="Appointment date"  onblur="this.placeholder = 'Enter Appointment date'"
-										 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')"  id="appdate" min = '22-02-2020'>
+										<input name="appdate" placeholder="Appointment date"  onblur="this.placeholder = 'Enter Appointment date'"
+										 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')"  id="appdate" min = '2020-02-22' step="1">
 										 <script>
 										var today = new Date();
 										var dd = today.getDate();
@@ -341,7 +341,7 @@
 														mm='0'+mm
 												}
 
-										today = dd+'-'+mm+'-'+yyyy;
+										today = yyyy+'-'+mm+'-'+dd;
 										document.getElementById("appdate").setAttribute("min", today);
 										document.getElementById("dob").setAttribute("max", today);
 										</script>
