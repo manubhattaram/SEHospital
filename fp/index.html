@@ -318,17 +318,17 @@
 										<input name="email" placeholder="Email address" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
 										 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" class="common_input form-control"
 										 required="" type="email">
-										<input name="name" placeholder="Date of birth" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter date of birth'"
-										 class="common_input form-control" required="" type="text">
+										<input name="name" placeholder="Date of birth"  onblur="this.placeholder = 'Enter date of birth'"
+										 class="common_input form-control" required=""  type="text" onfocus="(this.type='date')"  id="dob">
 										<select class="default-select">
-											<option data-display="Doctor’s name">Doctor needed in</option>
+											<option data-display="Doctor’s field">Doctor needed in</option>
 											<option value="1">ENT</option>
 											<option value="2">Physician</option>
 											<option value="3">Gynaecologist</option>
 											<option value="4">Dentist</option>
 										</select>
-										<input name="subject" placeholder="Appointment date" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Appointment date'"
-										 class="common_input mb-10 form-control" required="" type="text">
+										<input name="subject" placeholder="Appointment date"  onblur="this.placeholder = 'Enter Appointment date'"
+										 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')"  id="appdate" min = '22-02-2020'>
 
 										<textarea class="common_textarea form-control" name="message" placeholder="message" onfocus="this.placeholder = ''"
 										 onblur="this.placeholder = 'Message'" required=""></textarea>
@@ -387,6 +387,7 @@
 	<script src="js/popper.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/stellar.js"></script>
+	<script src="js/date.js"></script>
 	<script src="vendors/lightbox/simpleLightbox.min.js"></script>
 	<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
 	<script src="vendors/owl-carousel/owl.carousel.min.js"></script>
