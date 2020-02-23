@@ -6,11 +6,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* GET New App page. */
-router.get('/newapp', function(req, res) {
-    res.render('newapp', { title: 'New App' });
-});
-
 /*POST to appointment service*/
 router.post('/appointment' , function(req,res){
 	// Set our internal DB variable
@@ -46,4 +41,48 @@ router.post('/appointment' , function(req,res){
         }
     });
 });
+
+/*Check login details of patients*/
+router.post('/plogin', function(req, res){
+	// Set our internal DB variable
+    var db = req.db;
+
+    // Get our form values. These rely on the "name" attributes
+    var email = req.body.email;
+    var passwd = req.body.passwd;
+    
+    // Set our collection
+    var plogin = db.get('patientlogin');
+
+    // Find from the DB
+    var result1 = plogin.find({
+    	"email" : email, 
+    	"password" : passwd
+    });
+    res.redirect('/');
+});
+
+/*Check login details of staff*/
+router.post('/plogin', function(req, res){
+	// Set our internal DB variable
+    var db = req.db;
+
+    // Get our form values. These rely on the "name" attributes
+    var role = req.body.role;
+    var email = req.body.email;
+    var passwd = req.body.passwd;
+    
+    // Set our collection
+    var plogin = db.get('stafflogin');
+
+    // Find from the DB
+    var result1 = plogin.find({
+    	"role" :  role,
+    	"email" : email, 
+    	"password" : passwd
+    });
+    res.redirect('/');
+});
+
+
 module.exports = router;
