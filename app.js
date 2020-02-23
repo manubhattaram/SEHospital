@@ -4,6 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//MongoDB link
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/test?retryWrites=true&w=majority');
+db.then(()=>{
+	console.log("connection success");
+}).catch((e)=>{
+	console.error("Error !",e);
+});
+
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
@@ -18,6 +29,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
+
+//making db available to router
+app.use(function(req, res, next){
+	req.db = db;
+	next();
+});
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

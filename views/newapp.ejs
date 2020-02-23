@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Add User</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <form id="formAddUser" name="adduser" method="post" action="/appointment">
+      <input type="text" placeholder="username" name="name" />
+      <input type="text" placeholder="email" name="email" />
+      <input type="text" placeholder="dob" name="dob" />
+      <input type="text" placeholder="field" name="field" />
+      <input type="text" placeholder="appdate" name="appdate" />
+      <input type="text" placeholder="message" name="message" />
+      <button id="btnSubmit" type="submit">Submit</button>
+    </form>
+  </body>
+</html>
