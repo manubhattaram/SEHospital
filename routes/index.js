@@ -19,11 +19,11 @@ router.post('/appointment' , function(req,res){
     var appdate = req.body.appdate;
     var message = req.body.message;
     var $email = email;
-        
+
     //finding from mongodb
     var mongoclient = require('mongodb').MongoClient;
     var url = "mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/";
-    
+
     mongoclient.connect(url, function(err,db){
     	//if(err) throw err;
     	var dbo = db.db("test");
@@ -45,8 +45,8 @@ router.post('/appointment' , function(req,res){
     		}
     		db.close();
     	});
-    	
-    	
+
+
     	console.log("hello there");
     	var appointment = dbx.get('appointments');
 
@@ -71,15 +71,15 @@ router.post('/appointment' , function(req,res){
 
 /*Check login details of patients*/
 router.post('/plogin', function(req, res){
-	
+
 	// Get our form values. These rely on the "name" attributes
     var $email = req.body.email;
     var $passwd = req.body.passwd;
-    
+
     //finding from mongodb
     var mongoclient = require('mongodb').MongoClient;
     var url = "mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/";
-    
+
     mongoclient.connect(url, function(err,db){
     	//if(err) throw err;
     	var dbo = db.db("test");
@@ -87,16 +87,16 @@ router.post('/plogin', function(req, res){
     		//if(err) throw err;
     		//res.send(result);
     		db.close();
-    		
+
     		if(result.length>0){
-    			res.redirect("success.html");
+    			res.redirect("patient.html");
     		}
     		else{
     			res.redirect("failed.html");
     		}
     	});
     });
-    
+
 });
 
 /*Check login details of staff*/
@@ -109,7 +109,7 @@ router.post('/slogin', function(req, res){
 
     var mongoclient = require('mongodb').MongoClient;
     var url = "mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/";
-    
+
     //finding from mongodb
     mongoclient.connect(url, function(err,db){
     	//if(err) throw err;
@@ -118,16 +118,16 @@ router.post('/slogin', function(req, res){
     		//if(err) throw err;
     		//res.send(result);
     		db.close();
-    		
+
     		if(result.length>0){
-    			res.redirect("success.html");
+    			res.redirect("staff.html");
     		}
     		else{
     			res.redirect("failed.html");
     		}
     	});
     });
-    
+
 });
 
 module.exports = router;
