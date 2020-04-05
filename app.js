@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
 
 //MongoDB link
 var mongo = require('mongodb');
@@ -19,6 +20,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
+
+app.use(cookieParser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,6 +61,25 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+//Route for adding cookie
+app.get('/setuser', function(req, res){
+  res.cookie("userData", users);
+  res.send("user data added to cookie");
+});
+
+//Iterate users data from cookie
+app.get('/getuser', function(req, res){ 
+//shows all the cookies 
+res.send(req.cookies); 
+});
+
+//Route for destroying cookie 
+app.get('/logout', function(req, res){ 
+//it will clear the userData cookie 
+res.clearCookie('userData'); 
+res.send('user logout successfully'); 
 });
 
 module.exports = app;
