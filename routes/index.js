@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 /*POST to appointment service*/
-router.post('/appointment' , function(req,res){
+/*router.post('/appointment' , function(req,res){
 	// Set our internal DB variable
     var dbx = req.db;
 
@@ -67,10 +67,10 @@ router.post('/appointment' , function(req,res){
     });
     //redirect to success page
     res.redirect('bookingsuccessful.html');
-});
+});*/
 
 /*Check login details of patients*/
-router.post('/plogin', function(req, res){
+router.post('/patientlogin', function(req, res){
 
 	// Get our form values. These rely on the "name" attributes
     var $email = req.body.email;
@@ -100,7 +100,7 @@ router.post('/plogin', function(req, res){
 });
 
 /*Check login details of staff*/
-router.post('/slogin', function(req, res){
+router.post('/stafflogin', function(req, res){
 
     // Get our form values. These rely on the "name" attributes
     var $role = req.body.role;

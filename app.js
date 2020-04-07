@@ -8,13 +8,21 @@ var cookieParser = require('cookie-parser');
 
 //MongoDB link
 var mongo = require('mongodb');
-var monk = require('monk');
+/*var monk = require('monk');
 var db = monk('mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/test?retryWrites=true&w=majority');
 db.then(()=>{
 	console.log("connection success");
 }).catch((e)=>{
 	console.error("Error !",e);
-});
+});*/
+
+var mongoose=require('mongoose');
+var db = require('./config/keys').MongoURI;
+
+//connect to Mongo
+mongoose.connect(db, { useNewUrlParser: true })
+  .then(() => console.log("connection success"))
+  .catch((err)=>console.log(err));
 
 
 var indexRouter = require('./routes/index');
@@ -37,8 +45,8 @@ app.get('/', function(req,res){
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(express.urlencoded({ extended: false })); //Bodyparser
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
 
 //making db available to router
