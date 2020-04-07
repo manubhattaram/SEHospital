@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+//var expressLayouts=require('express-ejs-layouts');
 
 //MongoDB link
 var mongo = require('mongodb');
@@ -21,8 +22,11 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
-app.use(cookieParser());
+const PORT=process.env.PORT || 5000;
 
+app.listen(PORT, console.log(`Server started on port ${PORT}`))
+
+//app.use(expressLayouts);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -61,25 +65,6 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
-});
-
-//Route for adding cookie
-app.get('/setuser', function(req, res){
-  res.cookie("userData", users);
-  res.send("user data added to cookie");
-});
-
-//Iterate users data from cookie
-app.get('/getuser', function(req, res){ 
-//shows all the cookies 
-res.send(req.cookies); 
-});
-
-//Route for destroying cookie 
-app.get('/logout', function(req, res){ 
-//it will clear the userData cookie 
-res.clearCookie('userData'); 
-res.send('user logout successfully'); 
 });
 
 module.exports = app;
