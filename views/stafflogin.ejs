@@ -35,7 +35,12 @@
   </head>
 <body>
 
-<a class="primary-btn text-uppercase" type="button" href = "stafflogin.html">Staff Login</a> 
+<a class="primary-btn text-uppercase" type="button" href = "/users/patientlogin">Patient Login</a>
+
+<br/>
+
+<a class="primary-btn text-uppercase" type="button" href = "/">Back to Home</a>  
+
 
 <!-- Main -->
 <div class="d-md-flex h-md-100 align-items-center">
@@ -46,19 +51,22 @@
 					<i class="fa fa-anchor fa-3x"></i>
 				</p>
 				<h1 class="mb-0 mt-3 display-4">Hestia Medical</h1>
-				<h5 class="mb-4 font-weight-light">Patient Login Page</h5>
+				<h5 class="mb-4 font-weight-light">Staff login page</h5>
 			</div>
 		</div>
 	</div>
 	<div class="col-md-6 p-0 bg-white h-md-100 loginarea">
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
-			<form class="border rounded p-5" action="/patientlogin" method= "POST">
+			<form class="border rounded p-5" action="/stafflogin" method="POST">
 				<h3 class="mb-4 text-center">Sign In</h3>
 				<div class="form-group">
-					<input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required="">
+					<input type="text" class="form-control" id="exampleInputRole1" placeholder="Select Role: Admin/Doctor/Receptionist" required="">
 				</div>
 				<div class="form-group">
-					<input type="password" name = "passwd" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
+					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="E-mail" required="">
+				</div>
+				<div class="form-group">
+					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="">
 				</div>
 				<div class="form-group form-check">
 					<!--input type="checkbox" class="form-check-input" id="exampleCheck1">
