@@ -51,7 +51,20 @@ router.post('/appointment' , function(req,res){
     				email,
     				"password":"0000",
     				dob
-    			})
+    			});
+
+    			bcrypt.genSalt(10, (err, salt) => bcrypt.hash(newUser.password, salt, (err, hash) =>{
+    				if(err) throw err;
+
+    				//Set pw to hashed
+    				newUser.password=hash;
+
+    				newUser.save()
+    					.then(user => {
+    						res.redirect('/users/patientlogin')
+    					})
+    					.catch(err =>console.log(err));
+    			}))
     		}
     	});
     }
@@ -103,11 +116,6 @@ router.post('/appointment' , function(req,res){
     //redirect to success page
     res.redirect('bookingsuccessful.html');*/
 });
-
-/*//Register Page
-router.get('/register', function(req, res, next) {
-  res.send('respond with a resource');
-});*/
 
 
 module.exports = router;
