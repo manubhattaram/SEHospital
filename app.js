@@ -1,9 +1,10 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+//var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+constflash = require('connect-flash');
+const session = require('express-session');
 //var expressLayouts=require('express-ejs-layouts');
 
 //MongoDB link
