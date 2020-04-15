@@ -1,22 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-//var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 constflash = require('connect-flash');
 const session = require('express-session');
-//var expressLayouts=require('express-ejs-layouts');
+var expressLayouts=require('express-ejs-layouts');
 
 //MongoDB link
 var mongo = require('mongodb');
-/*var monk = require('monk');
-var db = monk('mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/test?retryWrites=true&w=majority');
-db.then(()=>{
-	console.log("connection success");
-}).catch((e)=>{
-	console.error("Error !",e);
-});*/
-
 var mongoose=require('mongoose');
 var db = require('./config/keys').MongoURI;
 
@@ -33,16 +24,16 @@ var app = express();
 
 const PORT=process.env.PORT || 5000;
 
-app.listen(PORT, console.log(`Server started on port ${PORT}`))
+app.listen(PORT, console.log(`Server started on port ${PORT}`));
 
-//app.use(expressLayouts);
+app.use(expressLayouts);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-app.get('/', function(req,res){
+/*app.get('/', function(req,res){
 	res.render('index',{title: 'Hestia Medical'})
-});
+});*/
 
 app.use(logger('dev'));
 app.use(express.json());
