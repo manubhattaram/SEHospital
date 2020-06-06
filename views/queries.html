@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,7 +10,8 @@
 	<link href="css1/font-awesome.min.css" rel="stylesheet">
 	<link href="css1/datepicker3.css" rel="stylesheet">
 	<link href="css1/styles.css" rel="stylesheet">
-
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="js1/queries.js"></script>
 	<!--Custom Font-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 	<!--[if lt IE 9]>
@@ -94,12 +96,148 @@
 			</ol>
 		</div><!--/.row-->
 
-		<div class="row">
+		<div class="row" >
 
 			<div class="col-lg-12">
+
+				<ng ng-app="myApp">
+			  <div class="container">
+			    <h1>Inbox</h1>
+
+			        <div class="row" ng-controller="inboxCtrl">
+
+			        <div class="col-md-10">
+			            <!--inbox toolbar-->
+			            <div class="row" ng-show="!isMessageSelected()">
+			                <div class="col-xs-12">
+			                    <a title="Refresh" class="btn btn-default btn-lg" id="refreshInbox" href="javascript:;" data-toggle="tooltip">
+			                      <span class="fa fa-refresh fa-lg"></span>
+			                    </a>
+			                    <button title="Compose New" class="btn btn-default btn-lg" data-target="#modalCompose" data-toggle="modal">
+			                      <span class="fa fa-edit fa-lg"></span>
+			                    </button>
+
+			                    <div class="pull-right">
+			                        <span class="text-muted"><b>{{(itemsPerPage * currentPage) + 1}}</b>–<b>{{(itemsPerPage * currentPage) + pagedItems[currentPage].length}}</b> of <b>{{items.length}}</b></span>
+			                        <div class="btn-group btn-group">
+			                            <button class="btn btn-default btn-lg" type="button" ng-click="prevPage()" ng-class="{disabled: currentPage == 0}">
+			                                <span class="glyphicon glyphicon-chevron-left"></span>
+			                            </button>
+			                            <button class="btn btn-default btn-lg" type="button" ng-click="nextPage()" ng-class="{disabled: currentPage == pagedItems.length - 1}">
+			                                <span class="glyphicon glyphicon-chevron-right"></span>
+			                            </button>
+			                        </div>
+			                    </div>
+			                </div><!--/col-->
+			                <div class="col-xs-12 spacer5"></div>
+			            </div><!--/row-->
+			            <!--/inbox toolbar-->
+			            <div class="panel panel-default inbox" id="inboxPanel">
+			                <!--message list-->
+			                <div class="table-responsive" ng-show="!isMessageSelected()">
+			                    <table class="table table-striped table-hover refresh-container pull-down">
+			                        <thead class="hidden-xs">
+			                            <tr><td class="col-sm-1"><input title="Mark all" type="checkbox"></td>
+			                            <td class="col-sm-3"><a href="javascript:;"><strong>Date</strong></a></td>
+			                            <td class="col-sm-1"></td>
+			                            <td class="col-sm-2"><a href="javascript:;"><strong>From</strong></a></td>
+			                            <td class="col-sm-4"><a href="javascript:;"><strong>Subject</strong></a></td>
+			                            <td class="col-sm-1"></td>
+			                        </tr></thead>
+
+			                          <tbody><tr ng-repeat="item in pagedItems[currentPage] | orderBy:sortingOrder:reverse">
+			                            <td class="col-sm-1 col-xs-4"><input title="Mark this item here" type="checkbox"></td>
+			                            <td class="col-sm-3 col-xs-4" ng-click="readMessage($index)"><span ng-class="{strong: !item.read}">{{item.dtSent}}</span></td>
+			                            <td class="col-sm-1 col-xs-4"><a title="Delete item" href="javascript:;" ng-click="deleteItem($index)" ng-class="{strong: !item.read}"><i class="fa fa-trash-o"></i></a></td>
+			                            <td class="col-sm-2 col-xs-4" ng-click="readMessage($index)"><span ng-class="{strong: !item.read}">{{item.from}}</span></td>
+			                            <td class="col-sm-4 col-xs-6" ng-click="readMessage($index)"><span ng-class="{strong: !item.read}">{{item.subject}}</span></td>
+			                            </tr>
+			                        </tbody>
+			                    </table>
+			                </div>
+			                <!--message detail-->
+			                <div class="container-fluid" ng-show="isMessageSelected()">
+			                    <div class="row" ng-controller="messageCtrl">
+			                        <div class="col-xs-12">
+			                            <h3 title="subject"><button class="close pull-right" aria-hidden="true" type="button" ng-click="closeMessage()">×</button><a href="javascript:;" ng-click="groupToPages()">Inbox</a> &gt; {{selected.subject}}</h3>
+			                        </div>
+			                        <div class="col-md-8">
+			                            <blockquote class="bg-info small">
+			                            <strong>{{selected.from}}</strong> &lt;{{selected.fromAddress}}&gt; on {{selected.dtSent}}
+			                            </blockquote>
+			                        </div>
+			                        <div class="col-md-4">
+			                			<div class="btn-group btn-group-lg pull-right">
+			                				<button title="Reply to this message" class="btn btn-primary btn-lg pull-right" data-target="#modalCompose" data-toggle="modal">
+																<span class="fa fa-edit fa-lg"></span>
+
+			                				</button>
+
+			                			</div>
+			                			<div class="spacer5 pull-right"></div>
+			                			<button title="Delete this message" class="btn btn-lg btn-default pull-right" data-toggle="tooltip" ng-click="deleteItem(selected.$index)">
+			            					<i class="fa fa-trash-o fa-1x"></i>
+			            				</button>
+			                		</div>
+			                		<div class="col-xs-12"><hr></div>
+			                        <div class="col-xs-12">
+			                            <!--message body-->
+			                            <p ng-bind-html="renderMessageBody(selected.body)"></p>
+			                            <!--/message body-->
+			                        </div>
+			                        <div class="col-xs-12 clearfix"><hr></div>
+			                        <div class="col-xs-12">
+			                            <a title="Download attachment" href="javascript:;" ng-show="selected.attachment"><span class="glyphicon glyphicon-paperclip"></span></a>
+			                        </div>
+			                    </div><!--/row-->
+			                </div>
+			            </div><!--/inbox panel-->
+			            <div class="well well-s text-right"><em>Inbox last updated: <span id="lastUpdated">{{date | date:'MM-dd-yyyy HH:mm:ss'}}</span></em></div>
+			        </div><!--/col-9-->
+			        <!-- /.modal compose message -->
+			        <div class="modal fade" id="modalCompose">
+			          <div class="modal-dialog">
+			            <div class="modal-content">
+			              <div class="modal-header">
+			                <button class="close" aria-hidden="true" type="button" data-dismiss="modal">×</button>
+			                <h4 class="modal-title">Compose Message</h4>
+			              </div>
+			              <div class="modal-body">
+			                <form class="form-horizontal" role="form">
+			                    <div class="form-group">
+			                      <label class="col-sm-2" for="inputTo">To</label>
+			                      <div class="col-sm-10"><input class="form-control" id="inputTo" type="email" placeholder="comma separated list of recipients"></div>
+			                    </div>
+			                    <div class="form-group">
+			                      <label class="col-sm-2" for="inputSubject">Subject</label>
+			                      <div class="col-sm-10"><input class="form-control" id="inputSubject" type="text" placeholder="subject"></div>
+			                    </div>
+			                    <div class="form-group">
+			                      <label class="col-sm-12" for="inputBody">Message</label>
+			                      <div class="col-sm-12"><textarea class="form-control" id="inputBody" rows="12"></textarea></div>
+			                    </div>
+			                </form>
+			              </div>
+			              <div class="modal-footer">
+			                <button class="btn btn-default pull-left" type="button" data-dismiss="modal">Cancel</button>
+			                <button class="btn btn-warning pull-left" type="button">Save Draft</button>
+			                <button class="btn btn-primary " type="button">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
+			              </div>
+			            </div><!-- /.modal-content -->
+			          </div><!-- /.modal-dialog -->
+			        </div><!-- /.modal compose message -->
+			    <div><!--/row ng-controller-->
+
+			  	</div><!--/container-->
+
+			  </div>
+
+			  </div>
+			</ng>
+
       </div>
 		</div><!--/.row-->
-
+</div>
 
 
 <script src="js1/jquery-1.11.1.min.js"></script>
