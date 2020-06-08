@@ -25,7 +25,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>Hestia</span>Medical</a>
-				<ul class="nav navbar-top-links navbar-right">
+				<!--ul class="nav navbar-top-links navbar-right">
 
 					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
 						<em class="fa fa-bell"></em><span class="label label-info">n</span>
@@ -36,10 +36,10 @@
 									<span class="pull-right text-muted small">3 mins ago</span></div>
 							</a></li>
 							<li class="divider"></li>
-							<!--li><a href="#">
+							<-li><a href="#">
 								<div><em class="fa fa-heart"></em> 2 upcoming appointsments
 									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li-->
+							</a></li>
 							<li class="divider"></li>
 							<li><a href="staff.html">
 								<div><em class="fa fa-user"></em> 2 upcoming appointments
@@ -47,7 +47,7 @@
 							</a></li>
 						</ul>
 					</li>
-				</ul>
+				</ul-->
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
@@ -108,58 +108,72 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default articles">
-					<div class="panel-heading">
-						Upcoming Appointments
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body articles-container">
-						<div class="article border-bottom">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-2 col-md-2 date">
-										<div class="large">30</div>
-										<div class="text-muted">Jun</div>
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div><!--End .article-->
+					<div class="panel panel-default">
+							<div class="panel-heading">
+								Book An Appointment
 
-						<div class="article border-bottom">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-2 col-md-2 date">
-										<div class="large">28</div>
-										<div class="text-muted">Jun</div>
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
-									</div>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div><!--End .article-->
+								<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
+							<div class="panel-body">
+								<form class="form-horizontal" action="" method="post">
+									<fieldset>
+										<!-- Name input-->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="name">Patient Name</label>
+											<div class="col-md-9">
+												<input id="name" name="name" type="text" placeholder="Patient name" class="form-control">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="name">Patient E-mail</label>
+											<div class="col-md-9">
+												<input id="email" name="email" type="email" placeholder="Patient email" class="form-control">
+											</div>
+										</div>
+										<!-- Email input-->
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="email">Date of Birth</label>
+												<div class="col-md-9">
+													<input name="dob" placeholder="Date of birth"  onblur="this.placeholder = 'Enter Date of birth'"
+													 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')" >
+												</div>
+											</div>
 
-						<div class="article">
-							<div class="col-xs-12">
-								<div class="row">
-									<div class="col-xs-2 col-md-2 date">
-										<div class="large">24</div>
-										<div class="text-muted">Jun</div>
-									</div>
-									<div class="col-xs-10 col-md-10">
-										<h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
-									</div>
-								</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="email">Appointment Date</label>
+												<div class="col-md-9">
+													<input name="appdate" placeholder="Appointment date"  onblur="this.placeholder = 'Enter Appointment date'"
+													 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')" >
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-md-3 control-label" for="email">Field of Doctor Needed</label>
+												<div class="col-md-9">
+							      								<select class="form-control">
+																		<option value="1">ENT</option>
+																		<option value="2">Physician</option>
+																		<option value="3">Gynaecologist</option>
+																		<option value="4">Dentist</option>
+																	</select>
+																</div>
+															</div>
+										<!-- Message body -->
+										<div class="form-group">
+											<label class="col-md-3 control-label" for="message">Message</label>
+											<div class="col-md-9">
+												<textarea class="form-control" id="message" name="message" placeholder="Please enter a message here..." rows="5"></textarea>
+											</div>
+										</div>
+
+										<!-- Form actions -->
+										<div class="form-group">
+											<div class="col-md-12 widget-right">
+												<button type="submit" class="btn btn-default btn-md pull-right">Submit</button>
+											</div>
+										</div>
+									</fieldset>
+								</form>
 							</div>
-							<div class="clear"></div>
-						</div><!--End .article-->
-					</div>
+						</div>
 				</div><!--End .articles-->
 
 				<!--div class="panel panel-default ">
@@ -188,9 +202,9 @@
 								</ul>
 							</li>
 						</ul>
-						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
-					<div class="panel-body">
-						<!div class="col-md-12 no-padding">
+						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div-->
+					<!--div class="panel-body">
+						<div class="col-md-12 no-padding">
 							<div class="row progress-labels">
 								<div class="col-sm-6">New Orders</div>
 								<div class="col-sm-6" style="text-align: right;">80%</div>
@@ -363,8 +377,8 @@
 								<button class="btn btn-primary btn-md" id="btn-chat">Send</button>
 						</span></div>
 					</div>
-				</div-->
-			</div><!--/.col-->
+				</div>
+			</div--><!--/.col-->
 
 			<!--div class="col-md-6">
 				<div class="panel panel-default">
@@ -373,10 +387,9 @@
 						<span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>
 					<div class="panel-body">
 						<div id="calendar"></div>
-					</div>
-				</div>
-			</div--><!--/.col-->
-
+					</div-->
+				<!--/div-->
+			</div><!--/.col-->
 		</div><!--/.row-->
 	</div>	<!--/.main-->
 
