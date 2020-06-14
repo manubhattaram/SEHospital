@@ -63,6 +63,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+///???????????
+/*app.use(session({
+	"email" : "session-cookie";
+});*/
+
 //Route for adding cookie
 app.get('/setuser', function(req, res){
   res.cookie("userData", users);

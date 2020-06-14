@@ -19,75 +19,38 @@
 	<![endif]-->
 </head>
 <body>
-	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="#"><span>Hestia</span>Medical</a>
-				<ul class="nav navbar-top-links navbar-right">
+				<a class="navbar-brand" href="/"><span>Hestia</span>Medical</a>
 
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-bell"></em><span class="label label-info">n</span>
-					</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a href="queries.html">
-								<div><em class="fa fa-envelope"></em> 1 New Query
-									<span class="pull-right text-muted small">3 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<!--li><a href="#">
-								<div><em class="fa fa-heart"></em> 2 upcoming appointsments
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li-->
-							<li class="divider"></li>
-							<li><a href="staff.html">
-								<div><em class="fa fa-user"></em> 2 upcoming appointments
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-						</ul>
-					</li>
-				</ul>
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
-	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+  <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
 				<img src="img/patient.jpg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
-				<!--div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div-->
+				<div class="profile-usertitle-name"><p id="demo"></p>
+				<script>  
+				email1 = window.localStorage.getItem("vOneLocalStorage"); 
+				email2 = email1.match(/^([^@]*)@/)[1];
+				document.getElementById("demo").innerHTML = email2 ;</script>
+				</div>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="divider"></div>
-
 		<ul class="nav menu">
-			<!--li><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li-->
-			<li><a href="Staff.html"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
-			<li class="active"><a href="doctoraccountinfo.html"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
-			<!--li><a href="elements.html"><em class="fa fa-toggle-off">&nbsp;</em> UI Elements</a></li>
-			<li><a href="panels.html"><em class="fa fa-clone">&nbsp;</em> Alerts &amp; Panels</a></li-->
-			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
-				<em class="fa fa-navicon">&nbsp;</em> Patients <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
-				</a>
-				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="ptable.html">
-						<span class="fa fa-arrow-right">&nbsp;</span> Manage cases
-					</a></li>
-					<li><a class="" href="queries.html">
-						<span class="fa fa-arrow-right">&nbsp;</span> Queries
-					</a></li>
-					<!--li><a class="" href="#">
-						<span class="fa fa-arrow-right">&nbsp;</span> Sub Item 3
-					</a></li-->
-				</ul>
-			</li>
-			<li><a href="stafflogin.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li ><a href="/patient"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+			<li class="active"><a href="/patientaccountinfo"><em class="fa fa-calendar">&nbsp;</em>My Account</a></li>
+
+			<li><a href="patientlogin.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -104,7 +67,10 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<h1 class="page-header">My Account</h1>
+				<h4><img src="img/edit.jpg" height="30" width="30"><a href="/editpatientdetails"><b>Edit Details</b></a></h4>
 			</div>
+			
+			
 		</div><!--/.row-->
 
     <div class="container bootstrap snippet">
@@ -171,12 +137,12 @@
             </div--><!--/col-9-->
 					<div class="col-md-6">
                    <div class="profile-head">
-                               <h5>
-                                     Kshiti Ghelani
-                               </h5>
-                               <h6>
-                                     Physician
-                               </h6>
+                               <!--h5>
+                                     Kshiti Ghelani <%- list[0].name %>
+                               </h5-->
+                               <!--h6>
+                                     Patient
+                               </h6-->
 
                          	<!--ul class="nav nav-tabs" id="myTab" role="tablist">
                                  <li class="nav-item">
@@ -195,43 +161,73 @@
 					                                 <label>User Id</label>
 					                                      </div>
 					                                          <div class="col-md-6">
-						                                                <p>Kshiti123</p>
+						                                                <p id="userid"></p>
+				<script>  
+				email1 = window.localStorage.getItem("vOneLocalStorage"); 
+				email2 = email1.match(/^([^@]*)@/)[1];
+				document.getElementById("userid").innerHTML = email2 ;</script>
 					                                           </div>
 					                  </div>
 						                <div class="row">
 						                     <div class="col-md-6">
 						                          <label>Name</label>
-						                                  </div>
-						                                      <div class="col-md-6">
-						                                              <p>Kshiti Ghelani</p>
-						                                      </div>
+						                     </div>
+						                     <div class="col-md-6">
+						                          <p><%- list[0].name %></p>
+						                     </div>
 						               </div>
+						               
+						               
+						               
 						               <div class="row">
 						                   <div class="col-md-6">
 						                       <label>Email</label>
 						                          	</div>
 						                              <div class="col-md-6">
-						                                     <p>kshitighelani@gmail.com</p>
+						                                     <p><%- list[0].email %></p>
 						                               </div>
 						               </div>
-						                                        <div class="row">
+						                                        <!--div class="row">
 						                                            <div class="col-md-6">
 						                                                <label>Phone</label>
 						                                            </div>
 						                                            <div class="col-md-6">
 						                                                <p>123 456 7890</p>
 						                                            </div>
-						                                        </div>
+						                                        </div-->
 						                                        <div class="row">
 						                                            <div class="col-md-6">
-						                                                <label>Profession</label>
+						                                                <label>Date of Birth</label>
 						                                            </div>
 						                                            <div class="col-md-6">
-						                                                <p>Physician</p>
-						                                            <!--/div>
-						                                        </div-->
-						                            </div>
-
+						                                                <p><%- list[0].dob %></p>
+						                                            </div>
+						                                        </div>
+						                                        
+						                    <div class="row">
+						                     <div class="col-md-6">
+						                          <label>Password</label>
+						                     </div>
+						                     <div class="col-md-6">
+						                          <script>function viewpass(){
+						                            	var x = document.getElementById("passwd");
+						                            	if(x.type === "password") x.type="text";
+						                            	else x.type = "password"; 	
+						                            	}
+						                            </script>
+						                            	
+						                          <p><input readonly type="password" value='<%-list[0].password%>' id="passwd"></p>
+						                     </div>
+						               </div>
+						               
+						               <div class="row">
+						                     <div class="col-md-6">
+						                          <p><input type="checkbox" onclick="viewpass()">  Show Password</p>
+						                     </div>
+						               </div>                    
+						                                        
+						                           	</div>
+						                            									
 						                        </div>
 						                    </div>
         </div><!--/row-->

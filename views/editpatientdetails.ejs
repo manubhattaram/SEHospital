@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>My Account</title>
+      <link href="css1/bootstrap.min.css" rel="stylesheet">
+      <link href="css1/font-awesome.min.css" rel="stylesheet">
+      <link href="css1/datepicker3.css" rel="stylesheet">
+      <link href="css1/profile.css" rel="stylesheet">
+      <link href="css1/styles.css" rel="stylesheet">
+      <script src="js/bootstrap.min.js"></script>
+      <!--script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script-->
+      <!--Custom Font-->
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+      <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+    
+      <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span></button>
+               <a class="navbar-brand" href="/"><span>Hestia</span>Medical</a>
+            </div>
+         </div>
+         <!-- /.container-fluid -->
+      </nav>
+      <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+         <div class="profile-sidebar">
+            <div class="profile-userpic">
+               <img src="img/patient.jpg" class="img-responsive" alt="">
+            </div>
+            <div class="profile-usertitle">
+               <div class="profile-usertitle-name">
+                  <p id="demo"></p>
+                  <script>  
+                     email1 = window.localStorage.getItem("vOneLocalStorage"); 
+                     email2 = email1.match(/^([^@]*)@/)[1];
+                     document.getElementById("demo").innerHTML = email2 ;
+                  </script>
+               </div>
+            </div>
+            <div class="clear"></div>
+         </div>
+         <ul class="nav menu">
+            <li ><a href="/patient"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
+            <li class="active"><a href="/patientaccountinfo"><em class="fa fa-calendar">&nbsp;</em>My Account</a></li>
+            <li><a href="patientlogin.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+         </ul>
+      </div>
+      <!--/.sidebar-->
+      <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+      <div class="row">
+         <ol class="breadcrumb">
+            <li><a href="/patient">
+               <em class="fa fa-home"></em>
+               </a>
+            </li>
+            <li class="active">My Account</li>
+         </ol>
+      </div>
+      
+      <!--/.row-->
+      <div class="row">
+         <div class="col-lg-12">
+            <h1 class="page-header">My Account</h1>
+            <h4><img src="img/edit.jpg" height="30" width="30"><a href="/editpatientdetails"><b>Edit Details</b></a></h4>
+         </div>
+      </div>
+      <div> Note: To edit the userId or email please contact the helpdesk or send a mail to hestia.medical.help@gmail.com.</div>
+      <br><br>
+      <!--/.row-->
+      <!div class="container bootstrap snippet">
+         <form class="border rounded p-5" action="/savepatientdetails" method="post">
+            <b>User Id</b><br>
+            <p id="userid"></p>
+            <script>  
+               
+               email1 = window.localStorage.getItem("vOneLocalStorage"); 
+               email2 = email1.match(/^([^@]*)@/)[1];
+               document.getElementById("userid").innerHTML = email2 ;
+               
+            </script>
+            <br>
+            <b>Name</b><br>
+            <div class="form-group">
+               <input class="form-control" type="text" value='<%-list[0].name%>' name="name" id="name">
+            </div>
+            <br>
+            <b>Email</b><br>
+            <p id="email123"><%-list[0].email%></p>
+            <br>
+            <b>Date of Birth</b><br>
+            <div class="form-group">
+               <input class="form-control" type="text" value='<%-list[0].dob%>' id="dob"  name="dob">
+            </div>
+            <br>
+            <b>Password</b><br>
+            <div class="form-group">
+               <input class="form-control" type="password" name = "passwd" value='<%-list[0].password%>' id="passwd">
+            </div>
+            <script>
+               function viewpass(){
+               	var x = document.getElementById("passwd");
+               	if(x.type === "password") x.type="text";
+               	else x.type = "password"; 	
+               }
+            </script>
+            <input type="checkbox" onclick="viewpass()">  Show Password</p>
+            <br>
+            <p><img src="img/save.jpg" height="29" width="29"><button type="submit" style="background-color:#10A5F5; width: 200px; height: 30px;"><b>Save</b></button</p>
+         </form>
+         
+         <!--div class="row">
+            </div--><!--/col-9-->
+         <!--div class="col-md-6">
+            <div class="profile-head">
+            </div>
+            </div>
+            <hr>
+            <hr>
+            <div class="col-md-8">
+            <!--div class="tab-content profile-tab" id="myTabContent">
+               <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"-->
+         <!--div class="row">
+            <div class="col-md-6">
+               <label>User Id</label>
+            </div>
+            <div class="col-md-6">
+               <p id="userid"></p>
+               <script>  
+                  email1 = window.localStorage.getItem("vOneLocalStorage"); 
+                  email2 = email1.match(/^([^@]*)@/)[1];
+                  document.getElementById("userid").innerHTML = email2 ;
+               </script>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+               <label>Name</label>
+            </div>
+            <div class="col-md-6">
+               <p><input class="form-control" type="text" value='<%-list[0].name%>' id="name"></p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+               <label>Email</label>
+            </div>
+            <div class="col-md-6">
+               <p><%- list[0].email %></p>
+            </div>
+            </div>
+            <!--div class="row">
+            <div class="col-md-6">
+                <label>Phone</label>
+            </div>
+            <div class="col-md-6">
+                <p>123 456 7890</p>
+            </div>
+            </div-->
+         <!--div class="row">
+            <div class="col-md-6">
+               <label>Date of Birth</label>
+            </div>
+            <div class="col-md-6">
+               <p><input class="form-control" type="text" value='<%-list[0].dob%>' id="dob"></p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+               <label>Password</label>
+            </div>
+            <div class="col-md-6">
+               <p><input class="form-control" type="password" value='<%-list[0].password%>' id="passwd"></p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-md-6">
+               <p><input type="checkbox" onclick="viewpass()">  Show Password</p>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <div class = "col-md-6">
+            <p><img src="img/save.jpg" height="29" width="29"><button type="submit" style="background-color:#10A5F5; width: 200px; height: 30px;"><b>Save</b></button</p></div>
+            <div class = "col-md-6">
+            <p><br/>To edit the userid and email address please contact the helpdesk.</p>
+            </div>
+            </div>
+            <!--/row-->
+      </div>
+      
+      <!--/.main-->
+      <script src="js1/jquery-1.11.1.min.js"></script>
+      <script src="js1/bootstrap.min.js"></script>
+      <script src="js1/chart.min.js"></script>
+      <script src="js1/chart-data.js"></script>
+      <script src="js1/easypiechart.js"></script>
+      <script src="js1/easypiechart-data.js"></script>
+      <script src="js1/bootstrap-datepicker.js"></script>
+      <script src="js1/custom.js"></script>
+      <script src="js/jquery-3.2.1.min.js"></script>
+      <script src="js/popper.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/stellar.js"></script>
+      <script src="js/date.js"></script>
+      <script src="vendors/lightbox/simpleLightbox.min.js"></script>
+      <script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+      <script src="vendors/owl-carousel/owl.carousel.min.js"></script>
+      <!script src="js/jquery.ajaxchimp.min.js"><!/script>
+      <script src="vendors/counter-up/jquery.waypoints.min.js"></script>
+      <script src="vendors/counter-up/jquery.counterup.js"></script>
+      <!--script src="js/mail-script.js"></script>
+         <!--gmaps Js-->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+      <script src="js/gmaps.min.js"></script>
+      <script src="js/theme.js"></script>
+      
+   </body>
+</html>
+
+
