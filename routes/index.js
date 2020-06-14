@@ -535,6 +535,29 @@ router.get('/editrcptdetails', function(req, res){
         		});
 });
 
+/* GET casehistory page */
+router.get('/casehistory', function(req, res){
+	res.render('casehistory');
+});
+
+/* GET addprescription */
+router.post('/addprescription', function(req, res){
+	var db = req.db;
+	
+	var name = req.body.name;
+	var email = req.body.email;
+	var appdate = req.body.appdate;
+	var message = req.body.message;
+	
+	var collection = db.get('casehistory');
+	
+	collection.insert({"when":appdate, "doc": name2, "docmail" : email2, "field" : field2, "patient" : email, "content" : message}, function(e, docs){
+		console.log(docs);
+		res.redirect("ptable");
+	});	
+});
+
+
 /* GET savercptdetails page */
 router.post('/savercptdetails', function(req, res){
 	

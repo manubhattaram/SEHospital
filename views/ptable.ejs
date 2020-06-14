@@ -26,39 +26,23 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>Hestia</span>Medical</a>
-				<ul class="nav navbar-top-links navbar-right">
-
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-bell"></em><span class="label label-info">n</span>
-					</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a href="queries.html">
-								<div><em class="fa fa-envelope"></em> 1 New Query
-									<span class="pull-right text-muted small">3 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<!--li><a href="#">
-								<div><em class="fa fa-heart"></em> 2 upcoming appointsments
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li-->
-							<li class="divider"></li>
-							<li><a href="staff.html">
-								<div><em class="fa fa-user"></em> 2 upcoming appointments
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-						</ul>
-					</li>
-				</ul>
+				
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="img/patient.jpg" class="img-responsive" alt="">
+				<img src="img/doctor.jpg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
+				<div class="profile-usertitle-name"><h4><p id="demo"></p></h4>
+				<script>  
+					email1 = window.localStorage.getItem("vTwoLocalStorage"); 
+					email2 = email1.match(/^([^@]*)@/)[1];
+					document.getElementById("demo").innerHTML = email2 ;
+					//gotobottom();
+				</script></div>
 				<!--div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div-->
 			</div>
 			<div class="clear"></div>
@@ -66,21 +50,21 @@
 		<div class="divider"></div>
 		<ul class="nav menu">
 			<!--li><a href="index.html"><em class="fa fa-Patients">&nbsp;</em> Patients</a></li-->
-			<li class=""><a href="staff.html"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
-			<li><a href="doctoraccountinfo.html"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
+			<li class=""><a href="/staff"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
+			<li><a href="/doctoraccountinfo"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
 				<em class="fa fa-navicon">&nbsp;</em> Patients <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-					<li><a class="active" href="ptable.html">
+					<li><a class="active" href="/ptable">
 						<span class="fa fa-arrow-right">&nbsp;</span> Manage cases
 					</a></li>
-					<li><a class="" href="queries.html">
+					<li><a class="" href="/queries">
 						<span class="fa fa-arrow-right">&nbsp;</span> Queries
 					</a></li>
 				</ul>
 			</li>
-			<li><a href="stafflogin.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
+			<li><a href="/stafflogin"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
 		</ul>
 	</div><!--/.sidebar-->
 
@@ -93,7 +77,10 @@
 				<li class="active">Patients</li>
 			</ol>
 		</div><!--/.row-->
-
+		<br>
+		<form action="/casehistory">
+		<button  style="background-color:#10A5F5;" type="submit"><h4>Add new case details</h4></button>
+		</form>
 		<div class="row">
 			<div class="col-lg-12">
 				<!--h1 class="page-header">Patients</h1-->
@@ -104,7 +91,7 @@
               <div class="col col-1">Patient Email Id</div>
               <!--div class="col col-2">Patient Name</div-->
               <div class="col col-3">Appointment Date</div>
-              <div class="col col-4">Case Status</div>
+              <div class="col col-4">Case Details</div>
             </li>
             
             <% 
@@ -113,7 +100,7 @@
             		list+='<h3>No case records found</h3>';
             	}
             	for(i=0; i<cases.length; i++){
-            		list += '<li class="table-row"><div class="col col-1" data-label="Patient Email Id">'+cases[i].patient+'</div><!--div class="col col-2" data-label="Patient Name"></div--><div class="col col-3" data-label="AppointmentDate">'+cases[i].when+'</div><div class="col col-4" data-label="Case Status"><a href="/CaseHistory">Click here to view full case history</a></div></li>';
+            		list += '<li class="table-row"><div class="col col-1" data-label="Patient Email Id">'+cases[i].patient+'</div><!--div class="col col-2" data-label="Patient Name"></div--><div class="col col-3" data-label="AppointmentDate">'+cases[i].when+'</div><div class="col col-4" data-label="Case Status"><a onclick="alert(&quot;Content:'+cases[i].content+'&quot;)">Click here to view full case details</a></div></li>';
             	}
             %>
             
