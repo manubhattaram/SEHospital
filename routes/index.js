@@ -47,7 +47,6 @@ router.post('/appointment' , function(req,res){
     var mongoclient = require('mongodb').MongoClient;
     var url = "mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/";
 
-    //response.redirect(request.get('referer'));
     
     var collection = dbx.get('docavail');
     collection.find({"field":field}, {}, function(e, docs){
