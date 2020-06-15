@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+//var popup = require('popups');
+
 
 var name1;
 var dob1;
@@ -21,6 +23,8 @@ router.get('/', function(req, res, next) {
 router.post('/appointment' , function(req,res){
 	// Set our internal DB variable
     var dbx = req.db;
+    
+    var mailmessage = "Thank you for booking an appointment at Hestia Medical.\n";
 
     // Get our form values. These rely on the "name" attributes
     var name = req.body.name;
@@ -29,6 +33,7 @@ router.post('/appointment' , function(req,res){
     var field = req.body.field;
     var appdate = req.body.appdate;
     var message = req.body.message;
+    var nope = false;
     
     var $email = email;
     
@@ -42,6 +47,29 @@ router.post('/appointment' , function(req,res){
     var mongoclient = require('mongodb').MongoClient;
     var url = "mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/";
 
+    //response.redirect(request.get('referer'));
+    
+    var collection = dbx.get('docavail');
+    collection.find({"field":field}, {}, function(e, docs){
+    	if(!(docs[0].avail>0)){
+    		mailmessage = mailmessage + "However, we are sorry to inform you than there are no empty slots for the appointment of the doctor you had requested. Please book again for a later date.\n";
+    		nope = true;
+			//popup.alert({
+    		//	content: 'Hello!'
+			//});
+			//import swal from 'sweetalert';
+
+			//swal("Hello world");
+			//res.write("<html><script>alert('Booking unsuccessful')</script></html>");
+			//res.json("hello world");
+    		//res.redirect(req.get('referer'));
+    	}
+    	else{
+    		mailmessage = mailmessage + "We are pleased to inform that your appointment with the requested doctor is successful.\n";
+    	}
+    	
+    });
+    
     mongoclient.connect(url, function(err,db){
     	//if(err) throw err;
     	var dbo = db.db("test");
@@ -54,6 +82,8 @@ router.post('/appointment' , function(req,res){
     		//res.send(result);
     		//db.close();
     		if(!(result.length>0)){
+    			
+    			mailmessage = mailmessage + "As this is your first time booking an appointment with us we are pleased to inform you that you can access your case history, book for a new appointment or send queries to the helpdesk more conveniently from your own login page.\nPlease visit the patient login page and enter your credentials, which are \nEmail: "+email+"\nPassword: 0000.\n";
     			//var add = dbo.collection("patientlogin");
     			dbo.collection("patientlogin").insertOne({
     			//patientlogin2.insertOne({
@@ -67,7 +97,8 @@ router.post('/appointment' , function(req,res){
     				}
     			});
     		}
-    		db.close();
+    		//db.close();
+    		
     	});
 
 
@@ -75,7 +106,7 @@ router.post('/appointment' , function(req,res){
     	var appointment = dbx.get('appointments');
 
 		//TODO: Do below insertion only if recpt table's remaining slots are >0.
-		
+		if(nope==false){
     	// Submit to the DB
     	appointment.insert({
         	//"name" : name,
@@ -90,6 +121,7 @@ router.post('/appointment' , function(req,res){
         	    //res.send("There was a problem adding the information to the appointment database.");
         	}
     	});
+    	
     	var when = new Date().toString();
     	if(message){
     		console.log("message sent");
@@ -97,12 +129,40 @@ router.post('/appointment' , function(req,res){
     		msg.insert({"from":email, "to":"rcpt", "when": when, "content" : message, "done" : "false"});
     	} 
     	else console.log("no message");
+    	}
+    	
+    	
     	
     });
+    
+    mailmessage = mailmessage+"\nThank you for choosing us.\n\nYours truly,\nHestia Medical.";
+    	
+    console.log(mailmessage);
+    console.log("Started");
+	
+    //const spawn = require("child_process").spawn;
+    //const pyprocess = spawn('python3', ["/mailing.py", email, mailmessage]);
+    
+    var spawn = require("child_process").spawn;
+	var process = spawn('python3', ["./bin/mailing.py", email, mailmessage]);
+	
+	process.stdout.on('data', function(data){
+		console.log(data);
+	});
+    
     //redirect to success page
     res.redirect('bookingsuccessful.html');
 });
 
+
+router.get('/mailer', function(req, res){
+	var spawn = require("child_process").spawn;
+	var process = spawn('python3', ["./bin/mailing.py", "dtanujakirthi@gmail.com", "This is the matter"]);
+	
+	process.stdout.on('data', function(data){
+		console.log(data);
+	});
+});	
 
 router.get('/patientaccountinfo', function(req, res){
     //finding from mongodb
