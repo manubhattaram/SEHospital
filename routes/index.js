@@ -630,6 +630,18 @@ router.get('/queries', function(req, res){
 	});
 });	
 
+/* GET docavail page */
+router.get('/docavail', function(req, res){
+	var db = req.db;
+	var collection = db.get('docavail');
+	collection.find({}, {}, function(e, docs){
+		console.log(docs);
+		res.render("docavail",{
+			"avail1" : docs
+		});
+	});
+});
+
 
 /* GET editrcptdetails page*/
 router.get('/editrcptdetails', function(req, res){
@@ -692,6 +704,7 @@ router.post('/savercptdetails', function(req, res){
 	
 	
 });
+
 
 
 
