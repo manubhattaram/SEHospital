@@ -56,7 +56,7 @@
 					<!-- Collect the nav links, forms, and other content for toggling -->
 					<div class="collapse navbar-collapse offset" id="navbarSupportedContent">
 						<ul class="nav navbar-nav menu_nav ml-auto">
-							<li class="nav-item active"><a class="nav-link" href="index.ejs">Home</a></li>
+							<li class="nav-item active"><a class="nav-link" href="/index">Home</a></li>
 							<li class="nav-item"><a class="nav-link" href="#contact">About</a></li>
 								<li class="nav-item"><a class="nav-link" href="departments.html">Departments</a></li>
 						<!--li class="nav-item submenu dropdown">
@@ -315,7 +315,7 @@
 				<div class="col-lg-12">
 					<div class="main_title">
 							<h2>Make an Appointment</h2>
-							<p>Skip the line and make an appointment before visiting. We offer expert doctors which are top of the line ENT doctors, Dentists, Neurologists and Physicians</p>
+							<p>Skip the line and make an appointment before visiting. We offer expert doctors which are top of the line in their fields</p>
 							</div>
 					<div class="row justify-content-center">
 						<div class="appoinment_form_section lite_bg">
@@ -336,8 +336,9 @@
 											<option value="3">Gynaecologist</option>
 											<option value="4">Dentist</option>
 										</select>-->
-										<input name="field" placeholder="Doctor's field" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter the doctor's field'"
-										 class="common_input form-control" required="" type="text">
+									
+										 <input name="field" placeholder="Doctor's field" onfocus="this.placeholder = ''" onblur="this.placeholder = 'ENT/Dentist/Neurology/Physician'"
+ 										 class="common_input form-control" required="" type="text" >
 										<input name="appdate" placeholder="Appointment date"  onblur="this.placeholder = 'Enter Appointment date'"
 										 class="common_input mb-10 form-control" required="" type="text" onfocus="(this.type='date')"  id="appdate" min = '2020-02-22' step="1" >
 										 <script>
