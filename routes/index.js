@@ -47,6 +47,7 @@ router.post('/appointment' , function(req,res){
     var mongoclient = require('mongodb').MongoClient;
     var url = "mongodb+srv://User12:pwd123@hestia-iz6gz.mongodb.net/";
 
+    var left = 0;
     
     var collection = dbx.get('docavail');
     collection.find({"field":field}, {}, function(e, docs){
@@ -67,15 +68,23 @@ router.post('/appointment' , function(req,res){
     		mailmessage = mailmessage + "We are pleased to inform that your appointment with the requested doctor is successful.\n";
     	}
     	
+    	
+    	
     });
+    
+    
+    if(nope==false){
+    	var coll4 = dbx.get('docavail');
+    	coll4.update({"field": field}, {$inc : {"avail" : -1}});
+    }
     
     mongoclient.connect(url, function(err,db){
     	//if(err) throw err;
-    	var dbo = db.db("test");
-    	var db1 = db.db("test");
+    	var collectionsd = dbx.get("patientlogin");
+    	var colldf = dbx.get("patientlogin");
     	//var patientlogin = dbx.get('patientlogin');
     	//var patientlogin2 = dbx.get('patientlogin');
-    	db1.collection("patientlogin").find({email : $email}).toArray(function(err, result){
+    	collectionsd.find({email : $email},function(err, result){
     	//patientlogin.find({email : $email}).toArray(function(err, result){
     		//if(err) throw err;
     		//res.send(result);
@@ -84,7 +93,7 @@ router.post('/appointment' , function(req,res){
     			
     			mailmessage = mailmessage + "As this is your first time booking an appointment with us we are pleased to inform you that you can access your case history, book for a new appointment or send queries to the helpdesk more conveniently from your own login page.\nPlease visit the patient login page and enter your credentials, which are \nEmail: "+email+"\nPassword: 0000.\n";
     			//var add = dbo.collection("patientlogin");
-    			dbo.collection("patientlogin").insertOne({
+    			colldf.insertOne({
     			//patientlogin2.insertOne({
     				"name" : name,
     				"dob" : dob,
@@ -134,7 +143,7 @@ router.post('/appointment' , function(req,res){
     	
     });
     
-    mailmessage = mailmessage+"\nThank you for choosing us.\n\nYours truly,\nHestia Medical.";
+    mailmessage = mailmessage+"\n\nYours truly,\nHestia Medical.";
     	
     console.log(mailmessage);
     console.log("Started");
@@ -148,6 +157,9 @@ router.post('/appointment' , function(req,res){
 	process.stdout.on('data', function(data){
 		console.log(data);
 	});
+    
+    
+    
     
     //redirect to success page
     res.redirect('bookingsuccessful.html');
