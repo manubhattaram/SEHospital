@@ -33,10 +33,16 @@
   	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
   		<div class="profile-sidebar">
   			<div class="profile-userpic">
-  				<img src="img/patient.jpg" class="img-responsive" alt="">
+  				<img src="img/receptionist.jpg" class="img-responsive" alt="">
   			</div>
   			<div class="profile-usertitle">
-  				<div class="profile-usertitle-name">Username</div>
+  				<div class="profile-usertitle-name"><h4><p id="demo"></p></h4>
+				<script>  
+					email1 = window.localStorage.getItem("vTwoLocalStorage"); 
+					email2 = email1.match(/^([^@]*)@/)[1];
+					document.getElementById("demo").innerHTML = email2 ;
+					//gotobottom();
+				</script></div>
   				<!--div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div-->
   			</div>
   			<div class="clear"></div>
@@ -45,10 +51,10 @@
 
   		<ul class="nav menu">
   			<!--li><a href="index.html"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li-->
-  			<li><a href="reception.html"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
-  			<li><a href="receptionistaccinfo.html"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
-  			<li class="active"><a href="docavail.html"><em class="fa fa-toggle-off">&nbsp;</em>Check Availability</a></li>
-  			<li><a href="recqueries.html"><em class="fa fa-clone">&nbsp;</em> Queries</a></li>
+  			<li><a href="/reception"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
+  			<li><a href="/receptionistaccinfo"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
+  			<li class="active"><a href="/docavail"><em class="fa fa-toggle-off">&nbsp;</em>Check Availability</a></li>
+  			<li><a href="/recqueries"><em class="fa fa-clone">&nbsp;</em> Queries</a></li>
 
   			<li><a href="stafflogin.html"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
   		</ul>
@@ -70,17 +76,30 @@
           <h2>Doctors' Availability</h2>
           <ul class="responsive-table">
             <li class="table-header">
-              <div class="col col-1">Id</div>
-              <div class="col col-2">Doctor Name</div>
+              <div class="col col-2">Doctor Email Id</div>
+              <!--div class="col col-2">Doctor Name</div-->
               <div class="col col-3">Doctor's Field</div>
               <div class="col col-4">Remaining slots</div>
             </li>
-            <li class="table-row">
+            
+            <% 
+            	var list = '';
+            	if(avail1.length==0){
+            		list+='<h3>No case records found</h3>';
+            	}
+            	for(i=0; i<avail1.length; i++){
+            		list += '<li class="table-row"><div class="col col-2" >'+avail1[i].email+'</div><div class="col col-4" >'+avail1[i].field+'</div><div class="col col-4" >'+avail1[i].avail+'</div></li>';
+            	}
+            %>
+            
+            <%- list %>
+            
+            <!--li class="table-row">
               <div class="col col-1" data-label="Doctor Id">42235</div>
               <div class="col col-2" data-label="Doctor Name">John Doe</div>
               <div class="col col-3" data-label="Doctor's Field">Physician</div>
               <div class="col col-4" data-label="Remaining slots">4</div>
-            </li>
+            </li-->
           </ul>
         </div>
       </div>
