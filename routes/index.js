@@ -94,7 +94,7 @@ router.post('/appointment' , function(req,res){
     	if(message){
     		console.log("message sent");
     		var msg = dbx.get('queries');
-    		msg.insert({"from":email, "to":"rcpt", "when": when, "content" : message});
+    		msg.insert({"from":email, "to":"rcpt", "when": when, "content" : message, "done" : "false"});
     	} 
     	else console.log("no message");
     	
@@ -259,7 +259,7 @@ router.post('/sendpatientquery', function(req, res){
 				const res = await UpdatePatientDashboard()
 	}*/
 	//async function updating(){
-		collection.insert({"from": from, "to" : to, "when" : when, "content" : content }, function(e, result){
+		collection.insert({"from": from, "to" : to, "when" : when, "content" : content, done: "false" }, function(e, result){
 			if(e) console.log(e);
 			else res.redirect("patient"); 
 		});
@@ -479,6 +479,85 @@ router.post('/savedoctordetails', function(req, res){
 	
 });
 
+
+/* rcpt reply query */
+router.post('/rcptreplyquery', function(req, res){
+	var db = req.db;
+	
+	var email = req.body.email;
+	var when = req.body.when;
+	var reply = req.body.replybox;
+	
+	var when2 = new Date().toString();
+	
+	console.log(email);
+	console.log(when);
+	console.log(reply);
+	
+	var collection = db.get('queries');
+	
+	collection.update({"from":email, "when":when}, {$set : {"done" : "true"}});
+    
+    collection.insert({"from":"rcpt", "to":email, "when": when2, "content" : reply, "done" : "false"}, function(e1,docs1){
+		console.log(docs1);
+		res.redirect('recqueries');
+	});
+	
+});
+
+/* doc reply query */
+router.post('/docreplyquery', function(req, res){
+	var db = req.db;
+	var email = req.body.email;
+	var when = req.body.when;
+	var reply = req.body.replybox;
+	
+	var when2 = new Date().toString();
+	
+	console.log(email);
+	console.log(when);
+	console.log(reply);
+	
+	var collection = db.get('queries');
+	
+	collection.update({"from":email, "to":email2, "when":when}, {$set : {"done" : "true"}});
+    
+    collection.insert({"from":"rcpt", "to":email, "when": when2, "content" : reply, "done" : "false"}, function(e1,docs1){
+		console.log(docs1);
+		res.redirect('queries');
+	});
+	
+});
+
+
+/* rcpt fwd query */
+router.post('/rcptfwdquery', function(req, res){
+	var db = req.db;
+	
+	var email = req.body.email;
+	var when = req.body.when;
+	var what = req.body.what;
+	var fwd = req.body.fwdbox;
+	
+	var when2 = new Date().toString();
+	
+	console.log(email);
+	console.log(when);
+	console.log(what);
+	console.log(fwd);
+	
+	var collection = db.get('queries');
+	
+	collection.update({"from":email, "when":when}, {$set : {"done" : "true"}});
+    
+    collection.insert({"from":email, "to":fwd, "when": when2, "content" : what, "done" : "false"}, function(e1,docs1){
+		console.log(docs1);
+		res.redirect('recqueries');
+	});
+	
+});
+
+
 /* GET ptable */
 router.get('/ptable', function(req, res){
 	var db = req.db;
@@ -526,6 +605,30 @@ router.get('/receptionistaccinfo', function(req, res){
         db.close();
     });
 });
+
+/* GET recqueries page */
+router.get('/recqueries', function(req,res){
+	var db = req.db;
+	var collection = db.get('queries');
+	collection.find({"to":"rcpt", "done":"false"}, {}, function(err, docs){
+		console.log(docs);
+		res.render("recqueries", {
+			"queries" : docs
+		});
+	});
+});
+
+/* GET doctor queries page */
+router.get('/queries', function(req, res){
+	var db = req.db;
+	var collection = db.get('queries');
+	collection.find({"to":email2, "done":"false"}, {}, function(e, docs){
+		console.log(docs);
+		res.render("queries", {
+			"queries" : docs
+		});
+	});
+});	
 
 
 /* GET editrcptdetails page*/

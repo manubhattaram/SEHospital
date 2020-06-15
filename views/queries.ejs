@@ -28,39 +28,23 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span></button>
 				<a class="navbar-brand" href="#"><span>Hestia</span>Medical</a>
-				<ul class="nav navbar-top-links navbar-right">
-
-					<li class="dropdown"><a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-						<em class="fa fa-bell"></em><span class="label label-info">n</span>
-					</a>
-						<ul class="dropdown-menu dropdown-alerts">
-							<li><a href="queries.html">
-								<div><em class="fa fa-envelope"></em> 1 New Query
-									<span class="pull-right text-muted small">3 mins ago</span></div>
-							</a></li>
-							<li class="divider"></li>
-							<!--li><a href="#">
-								<div><em class="fa fa-heart"></em> 2 upcoming appointsments
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li-->
-							<li class="divider"></li>
-							<li><a href="staff.html">
-								<div><em class="fa fa-user"></em> 2 upcoming appointments
-									<span class="pull-right text-muted small">4 mins ago</span></div>
-							</a></li>
-						</ul>
-					</li>
-				</ul>
+				
 			</div>
 		</div><!-- /.container-fluid -->
 	</nav>
 	<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
 		<div class="profile-sidebar">
 			<div class="profile-userpic">
-				<img src="img/patient.jpg" class="img-responsive" alt="">
+				<img src="img/doctor.jpg" class="img-responsive" alt="">
 			</div>
 			<div class="profile-usertitle">
-				<div class="profile-usertitle-name">Username</div>
+				<div class="profile-usertitle-name"><h4><p id="demo"></p></h4>
+				<script>  
+					email1 = window.localStorage.getItem("vTwoLocalStorage"); 
+					email2 = email1.match(/^([^@]*)@/)[1];
+					document.getElementById("demo").innerHTML = email2 ;
+					//gotobottom();
+				</script></div>
 				<!--div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div-->
 			</div>
 			<div class="clear"></div>
@@ -68,16 +52,16 @@
 		<div class="divider"></div>
 		<ul class="nav menu">
 			<!--li><a href="index.html"><em class="fa fa-Patients">&nbsp;</em> Patients</a></li-->
-			<li class=""><a href="staff.html"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
-			<li><a href="doctoraccountinfo.html"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
+			<li class=""><a href="/staff"><em class="fa fa-calendar">&nbsp;</em> Dashboard</a></li>
+			<li><a href="/doctoraccountinfo"><em class="fa fa-bar-chart">&nbsp;</em> My account</a></li>
 			<li class="parent "><a data-toggle="collapse" href="#sub-item-1">
 				<em class="fa fa-navicon">&nbsp;</em> Patients <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
 				</a>
 				<ul class="children collapse" id="sub-item-1">
-					<li><a class="" href="ptable.html">
+					<li><a class="" href="/ptable">
 						<span class="fa fa-arrow-right">&nbsp;</span> Manage cases
 					</a></li>
-					<li><a class="active" href="queries.html">
+					<li><a class="active" href="/queries">
 						<span class="fa fa-arrow-right">&nbsp;</span> Queries
 					</a></li>
 				</ul>
@@ -86,7 +70,7 @@
 		</ul>
 	</div><!--/.sidebar-->
 
-	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+	<!--div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
 		<div class="row">
 			<ol class="breadcrumb">
 				<li><a href="#">
@@ -96,7 +80,7 @@
 			</ol>
 		</div><!--/.row-->
 
-		<div class="row" >
+		<!--div class="row" >
 
 			<div class="col-lg-12">
 
@@ -108,7 +92,7 @@
 
 			        <div class="col-md-10">
 			            <!--inbox toolbar-->
-			            <div class="row" ng-show="!isMessageSelected()">
+			            <!--div class="row" ng-show="!isMessageSelected()">
 			                <div class="col-xs-12">
 			                    <a title="Refresh" class="btn btn-default btn-lg" id="refreshInbox" href="javascript:;" data-toggle="tooltip">
 			                      <span class="fa fa-refresh fa-lg"></span>
@@ -129,12 +113,12 @@
 			                        </div>
 			                    </div>
 			                </div><!--/col-->
-			                <div class="col-xs-12 spacer5"></div>
-			            </div><!--/row-->
+			                <!--div class="col-xs-12 spacer5"></div>
+			            <!--/div><!--/row-->
 			            <!--/inbox toolbar-->
-			            <div class="panel panel-default inbox" id="inboxPanel">
+			            <!--div class="panel panel-default inbox" id="inboxPanel">
 			                <!--message list-->
-			                <div class="table-responsive" ng-show="!isMessageSelected()">
+			                <!--div class="table-responsive" ng-show="!isMessageSelected()">
 			                    <table class="table table-striped table-hover refresh-container pull-down">
 			                        <thead class="hidden-xs">
 			                            <tr><td class="col-sm-1"><input title="Mark all" type="checkbox"></td>
@@ -156,7 +140,7 @@
 			                    </table>
 			                </div>
 			                <!--message detail-->
-			                <div class="container-fluid" ng-show="isMessageSelected()">
+			                <!--div class="container-fluid" ng-show="isMessageSelected()">
 			                    <div class="row" ng-controller="messageCtrl">
 			                        <div class="col-xs-12">
 			                            <h3 title="subject"><button class="close pull-right" aria-hidden="true" type="button" ng-click="closeMessage()">×</button><a href="javascript:;" ng-click="groupToPages()">Inbox</a> &gt; {{selected.subject}}</h3>
@@ -182,20 +166,20 @@
 			                		<div class="col-xs-12"><hr></div>
 			                        <div class="col-xs-12">
 			                            <!--message body-->
-			                            <p ng-bind-html="renderMessageBody(selected.body)"></p>
+			                            <!--p ng-bind-html="renderMessageBody(selected.body)"></p>
 			                            <!--/message body-->
-			                        </div>
+			                        <!--/div>
 			                        <div class="col-xs-12 clearfix"><hr></div>
 			                        <div class="col-xs-12">
 			                            <a title="Download attachment" href="javascript:;" ng-show="selected.attachment"><span class="glyphicon glyphicon-paperclip"></span></a>
 			                        </div>
 			                    </div><!--/row-->
-			                </div>
+			                <!--/div>
 			            </div><!--/inbox panel-->
-			            <div class="well well-s text-right"><em>Inbox last updated: <span id="lastUpdated">{{date | date:'MM-dd-yyyy HH:mm:ss'}}</span></em></div>
+			            <!--div class="well well-s text-right"><em>Inbox last updated: <span id="lastUpdated">{{date | date:'MM-dd-yyyy HH:mm:ss'}}</span></em></div>
 			        </div><!--/col-9-->
 			        <!-- /.modal compose message -->
-			        <div class="modal fade" id="modalCompose">
+			        <!--div class="modal fade" id="modalCompose">
 			          <div class="modal-dialog">
 			            <div class="modal-content">
 			              <div class="modal-header">
@@ -224,20 +208,56 @@
 			                <button class="btn btn-primary " type="button">Send <i class="fa fa-arrow-circle-right fa-lg"></i></button>
 			              </div>
 			            </div><!-- /.modal-content -->
-			          </div><!-- /.modal-dialog -->
-			        </div><!-- /.modal compose message -->
-			    <div><!--/row ng-controller-->
+			          <!--/div><!-- /.modal-dialog -->
+			        <!--/div><!-- /.modal compose message -->
+			    <!--div><!--/row ng-controller-->
 
-			  	</div><!--/container-->
+			  	<!--/div><!--/container-->
 
-			  </div>
+			  <!--/div>
 
 			  </div>
 			</ng>
 
       </div>
 		</div><!--/.row-->
-</div>
+<!--/div-->
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li class="active">Queries</li>
+			</ol>
+		</div><!--/.row-->
+		<br>
+		<div class="row">
+			<div class="col-lg-12">
+				<!--h1 class="page-header">Patients</h1-->
+        <div class="container">
+          <h2>Unresolved Queries</h2>
+          <ul class="responsive-table">
+            <li class="table-header">
+              <div class="col col-1">Sent Date</div>
+              <div class="col col-3">Patient Email ID</div>
+              <div class="col col-2">Patient Query</div>
+              <div class="col col-4">Action</div>
+            </li>
+            
+            <% 
+            	var list = '';
+            	if(queries.length==0){
+            		list+='<h3>No unresolved queries found</h3>';
+            	}
+            	for(i=0; i<queries.length; i++){
+            		list += '<li class="table-row"><div class="col col-1" >'+queries[i].when+'</div><div class="col col-3" >'+queries[i].from+'</div><div class="col col-2" >'+queries[i].content+'</div><script>function reply'+i+'(){document.getElementById("replybox'+i+'").removeAttribute("hidden");document.getElementById("submitrb'+i+'").removeAttribute("hidden");document.getElementById("submitrbc'+i+'").removeAttribute("hidden");}function noreply'+i+'(){document.getElementById("replybox'+i+'").setAttribute("hidden", true);document.getElementById("submitrb'+i+'").setAttribute("hidden", true);document.getElementById("submitrbc'+i+'").setAttribute("hidden", true);}</script><div class="col col-4" ><button onclick="reply'+i+'()" style="background-color:#10A5F5;"><h4>&nbsp;&nbsp;Reply&nbsp;&nbsp;</h4></button><p>&nbsp;&nbsp;</p></li><li><form action="/docreplyquery" method="post"><input type="text" name="email" id="email" value="'+queries[i].from+'" hidden><input type="text" name="when" id="when" value="'+queries[i].when+'" hidden><textarea placeholder="Type the reply here.." id="replybox'+i+'" name="replybox" rows="5" cols="88" hidden></textarea><input type="submit" name="submitrb" id="submitrb'+i+'" value="Send"  style="background-color:#10A5F5; height:30px ; width:70px" hidden></form><button name="submitrbc'+i+'" id="submitrbc'+i+'" onclick="noreply'+i+'()" style="background-color:#10A5F5; height:30px ; width:70px" hidden>X</button></li>';
+            	}
+            %>
+            
+            <%- list %>
+
 
 
 <script src="js1/jquery-1.11.1.min.js"></script>
