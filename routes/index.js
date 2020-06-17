@@ -80,11 +80,11 @@ router.post('/appointment' , function(req,res){
     
     mongoclient.connect(url, function(err,db){
     	//if(err) throw err;
-    	var collectionsd = dbx.get("patientlogin");
-    	var colldf = dbx.get("patientlogin");
+    	//var collectionsd = dbx.get("patientlogin");
+    	var coll = dbx.get("patientlogin");
     	//var patientlogin = dbx.get('patientlogin');
     	//var patientlogin2 = dbx.get('patientlogin');
-    	collectionsd.find({email : $email},function(err, result){
+    	coll.find({email : $email},function(err, result){
     	//patientlogin.find({email : $email}).toArray(function(err, result){
     		//if(err) throw err;
     		//res.send(result);
@@ -93,7 +93,7 @@ router.post('/appointment' , function(req,res){
     			
     			mailmessage = mailmessage + "As this is your first time booking an appointment with us we are pleased to inform you that you can access your case history, book for a new appointment or send queries to the helpdesk more conveniently from your own login page.\nPlease visit the patient login page and enter your credentials, which are \nEmail: "+email+"\nPassword: 0000.\n";
     			//var add = dbo.collection("patientlogin");
-    			colldf.insertOne({
+    			coll.insert({
     			//patientlogin2.insertOne({
     				"name" : name,
     				"dob" : dob,
@@ -103,6 +103,7 @@ router.post('/appointment' , function(req,res){
     				if(err1){
     					res.send("There was a problem adding the information to the patient database.");
     				}
+    				console.log("new added");
     			});
     		}
     		//db.close();
