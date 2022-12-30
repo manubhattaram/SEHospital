@@ -19,7 +19,7 @@
   "description": "Hospital Management Portal",
   "main": "app.js",
   "devDependencies": {
-    "mocha": "^7.1.1"
+    "mocha": "^10.2.0"
   },
   "repository": {
     "type": "git",
